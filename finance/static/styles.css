@@ -50,9 +50,23 @@ main table {
     text-align: left;
 }
 
+.main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainTitle {
+    margin: 3%;
+}
 
 tbody {
     display: table-row-group;
     vertical-align: middle;
     border-color: inherit;
+}
+
+#allocation {
+    position: relative;
 }

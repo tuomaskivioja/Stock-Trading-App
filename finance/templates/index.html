@@ -5,37 +5,49 @@
 {% endblock %}
 
 {% block main %}
-    <h1>Holdings</h1>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Symbol</th>
-                <th>Name</th>
-                <th>Shares</th>
-                <th>Price</th>
-                <th>TOTAL</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for holding in holdings %}
+    <h1 class="mainTitle">Holdings</h1>
+    <div class="main-container">
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>{{ holding.symbol }}</td>
-                    <td>{{ holding.name }}</td>
-                    <td>{{ holding.shares }}</td>
-                    <td>{{ holding.price }}</td>
-                    <td>{{ holding.total }}</td>
+                    <th>Symbol</th>
+                    <th>Name</th>
+                    <th>Shares</th>
+                    <th>Price</th>
+                    <th>TOTAL</th>
                 </tr>
-            {% endfor %}
+            </thead>
+            <tbody>
+                {% for holding in holdings %}
+                    <tr>
+                        <td class="symbol">{{ holding.symbol }}</td>
+                        <td>{{ holding.name }}</td>
+                        <td>{{ holding.shares }}</td>
+                        <td>{{ holding.price }}</td>
+                        <td class="holdingValue">{{ holding.total }}</td>
+                    </tr>
+                {% endfor %}
+                    <tr>
+                        <td colspan="4">CASH</td>
+                        <td id="cashValue">{{ cash }}</td>
+                    </tr>
+            </tbody>
+            <tfoot>
                 <tr>
-                    <td colspan="4">CASH</td>
-                    <td>{{ cash }}</td>
+                    <td colspan="4"></td>
+                    <td><b>{{ grand_total }}</b></td>
                 </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="4"></td>
-                <td><b>{{ grand_total }}</b></td>
-            </tr>
-        </tfoot>
-    </table>
+            </tfoot>
+        </table>
+        <div class="chart-container" style="position: relative; width:100%">
+            <canvas id="allocation"></canvas>
+        </div>
+    </div>
+    <script>
+        setTimeout(() => {
+            const ctx = document.getElementById('allocation');
+            console.log(config)
+            const myChart = new Chart(ctx, config);
+        }, 100);
+    </script>
 {% endblock %}
